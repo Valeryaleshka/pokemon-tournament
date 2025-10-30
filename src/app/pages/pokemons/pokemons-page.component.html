@@ -1,0 +1,12 @@
+<app-header></app-header>
+<app-second-header></app-second-header>
+@if (generatePokemonService.loading()) {
+  Loading....
+} @else {
+  <app-card-wrapper>
+    @for (pokemon of generatePokemonService.pokemons(); track pokemon.id) {
+      <app-card [pokemon]="pokemon"/>
+    }
+
+  </app-card-wrapper>
+}

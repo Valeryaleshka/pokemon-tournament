@@ -6,12 +6,12 @@ export const routes: Routes = [
     path: '',
     component: Root,
     children: [
-      {path: '', pathMatch: 'full', redirectTo: '/main'},
+      {path: '', pathMatch: 'full', redirectTo: '/pokemons'},
       {
         path: 'main',
         loadComponent: () =>
-          import('./pages/main/main').then(
-            (m) => m.Main,
+          import('./pages/pokemons/pokemons-page.component').then(
+            (m) => m.PokemonsPage,
           ),
       },
     ]

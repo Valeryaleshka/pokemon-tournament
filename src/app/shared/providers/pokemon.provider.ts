@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Pokemon} from '../interfaces/pokemon.interfaces';
+import {IPokemon, PokemonType} from '../types/pokemon.types';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -11,18 +11,18 @@ export class PokemonProvider {
   http = inject(HttpClient);
 
 
-  public getPokemons(id: number): Observable<Pokemon> {
+  public getSinglePokemon(id: number): Observable<IPokemon> {
     return this.http.get<Welcome>(`https://pokeapi.co/api/v2/pokemon/${id}`).pipe(map((data) => {
       return {
         id: data.id,
         name: data.name,
-        type: data.types[0]?.type.name || 'unknown', // Primary type
+        type: data.types[0]?.type.name || 'unknown',
         baseExperience: data.baseExperience || 0,
         imageUrl: data.sprites.frontDefault,
         wins: 0,
         losses: 0,
         ties: 0,
-        winRate: 0,
+        winrate: 0,
       }
     }))
   }
@@ -58,7 +58,7 @@ export interface Ability {
 }
 
 export interface Species {
-  name: string;
+  name: PokemonType;
   url: string;
 }
 

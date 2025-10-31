@@ -4,6 +4,9 @@ import {Header} from '../../components/header/header';
 import {CardWrapper} from '../../components/card-wrapper/card-wrapper';
 import {Card} from '../../components/card/card';
 import {PokemonService} from './services/pokemon.service';
+import {Sort} from '../../components/sort/sort';
+import {PokemonSortOptions} from '../../shared/constants/pokemon.constants';
+import {ISortParams} from '../../shared/types/common.types';
 
 @Component({
   selector: 'app-pokemons',
@@ -12,6 +15,7 @@ import {PokemonService} from './services/pokemon.service';
     Header,
     CardWrapper,
     Card,
+    Sort,
   ],
   providers: [PokemonService],
   standalone: true,
@@ -19,9 +23,17 @@ import {PokemonService} from './services/pokemon.service';
   styleUrl: './pokemons-page.component.less',
 })
 export class PokemonsPage implements OnInit {
-  generatePokemonService = inject(PokemonService);
+  pokemonService = inject(PokemonService);
+  pokemons = this.pokemonService.pokemons;
+
 
   ngOnInit() {
-    this.generatePokemonService.initPokemons(16);
+    this.pokemonService.initPokemons(16);
   }
+
+  sortChanged(sort: ISortParams) {
+    this.pokemonService.setCurrentSort(sort);
+  }
+
+  pokemonSortOptions = PokemonSortOptions
 }

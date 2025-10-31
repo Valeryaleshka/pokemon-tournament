@@ -1,8 +1,10 @@
-<div class="card">
-  <div class="card-header">
-    <div class="title">{{ pokemon().name }}</div>
-    <div class="img-wrapper">
-      <img [ngSrc]="pokemon().imageUrl" alt="pokemon-image" fill>
-    </div>
+<div class="card-content">
+  <h3 class="title">{{ pokemon().name | capitalizeFirst }}</h3>
+  <div class="img-wrapper">
+    <img [ngSrc]="pokemon().imageUrl" alt="pokemon-image" fill priority>
   </div>
+  <div>Winnings: {{ pokemon().wins }}</div>
+  <div>Looses: {{ pokemon().losses }}</div>
+  <div>Tie: {{ pokemon().ties }}</div>
 </div>
+

@@ -1,10 +1,17 @@
-<app-header></app-header>
-<app-second-header></app-second-header>
-@if (generatePokemonService.loading()) {
+<app-header>
+  <div>
+    <h1>Pokemon League</h1>
+  </div>
+</app-header>
+<app-second-header>
+  <app-sort [sortOptions]="pokemonSortOptions" [currentSort]="pokemonService.currentSort()"
+            (sortChange)="sortChanged($event)"></app-sort>
+</app-second-header>
+@if (pokemonService.loading()) {
   Loading....
 } @else {
   <app-card-wrapper>
-    @for (pokemon of generatePokemonService.pokemons(); track pokemon.id) {
+    @for (pokemon of pokemons(); track pokemon.id) {
       <app-card [pokemon]="pokemon"/>
     }
 

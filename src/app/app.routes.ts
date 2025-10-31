@@ -8,7 +8,7 @@ export const routes: Routes = [
     children: [
       {path: '', pathMatch: 'full', redirectTo: '/pokemons'},
       {
-        path: 'main',
+        path: 'pokemons',
         loadComponent: () =>
           import('./pages/pokemons/pokemons-page.component').then(
             (m) => m.PokemonsPage,

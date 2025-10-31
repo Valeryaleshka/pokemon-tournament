@@ -11,6 +11,6 @@ export function generateUniquePokemonIds(count: number): number[] {
     const randomIndex = Math.floor(Math.random() * (i + 1));
     [allNumbers[i], allNumbers[randomIndex]] = [allNumbers[randomIndex], allNumbers[i]];
   }
-  
+
   return allNumbers.slice(0, count);
 }

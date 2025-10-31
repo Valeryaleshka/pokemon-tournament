@@ -1,15 +1,17 @@
 import {Component, input} from '@angular/core';
-import {Pokemon} from '../../pages/pokemons/interfaces/pokemon.interfaces';
 import {NgOptimizedImage} from '@angular/common';
+import {IPokemon} from '../../shared/types/pokemon.types';
+import {CapitalizeFirstPipe} from '../../shared/pipes/capitalize-first-pipe';
 
 @Component({
   selector: 'app-card',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    CapitalizeFirstPipe
   ],
   templateUrl: './card.html',
   styleUrl: './card.less',
 })
 export class Card {
-  pokemon = input.required<Pokemon>();
+  pokemon = input.required<IPokemon>();
 }

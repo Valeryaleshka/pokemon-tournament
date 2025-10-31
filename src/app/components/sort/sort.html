@@ -1,0 +1,25 @@
+<div class="sort-container">
+  <select
+    [value]="currentSort().value"
+    (change)="onFieldChange($event)"
+    class="sort-select"
+  >
+    @for (option of sortOptions(); track option.value) {
+      <option [value]="option.value">
+        {{ option.title }}
+      </option>
+    }
+  </select>
+
+  <select
+    [value]="currentSort().direction"
+    (change)="onDirectionChange($event)"
+    class="sort-select"
+  >
+    @for (direction of sortDirectionList; track direction.order) {
+      <option [value]="direction.order">
+        {{ direction.title }}
+      </option>
+    }
+  </select>
+</div>

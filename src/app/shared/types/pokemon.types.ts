@@ -19,6 +19,9 @@ export enum PokemonType {
   PSYCHIC = 'psychic',
   FIGHTING = 'fighting',
   DARK = 'dark',
+  ROCK = 'rock',
+  DRAGON = 'dragon',
+  BUG = 'bug',
   NORMAL = 'normal'
 }
 

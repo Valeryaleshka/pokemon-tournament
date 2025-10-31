@@ -5,13 +5,14 @@ import {PokemonProvider} from '../../../shared/providers/pokemon.provider';
 import {PokemonTournamentService} from "../../../shared/services/pokemon-tournament.service";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { POKEMON_COUNT } from '../../../shared/constants/pokemon.constants';
 
 @Injectable()
 export class PokemonService {
   private readonly provider = inject(PokemonProvider);
   private readonly pokemonTournamentService = inject(PokemonTournamentService);
 
-  private readonly numberOfPokemons$ = new BehaviorSubject<number>(16);
+  private readonly numberOfPokemons$ = new BehaviorSubject<number>(POKEMON_COUNT);
   public loading = signal<boolean>(false);
 
   public readonly pokemons = toSignal(
@@ -29,10 +30,6 @@ export class PokemonService {
 
   private generateObservables(ids: number[]): Observable<any>[] {
     return ids.map(id => this.provider.getSinglePokemon(id));
-  }
-
-  public initPokemons(numberOfPokemons: number): void {
-    this.numberOfPokemons$.next(numberOfPokemons);
   }
 }
 

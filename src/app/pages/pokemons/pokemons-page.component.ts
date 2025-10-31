@@ -30,24 +30,17 @@ export const defaultPokemonSortState: ISortParams = {
     ZoomOnHoverDirective,
     SortByPipe,
     SortComponent,
+    SecondHeader,
   ],
   providers: [PokemonService],
   standalone: true,
   templateUrl: './pokemons-page.component.html',
   styleUrl: './pokemons-page.component.less',
 })
-export class PokemonsPage implements OnInit {
+export class PokemonsPage {
   pokemonService = inject(PokemonService);
   pokemons = this.pokemonService.pokemons;
   sort = signal(defaultPokemonSortState);
-
-  ngOnInit() {
-    this.pokemonService.initPokemons(16);
-  }
-
-  sortChanged(sort: ISortParams) {
-    this.sort.set(sort);
-  }
 
   pokemonSortOptions = POKEMON_SORT_OPTIONS;
   protected readonly sortBy = sortBy;

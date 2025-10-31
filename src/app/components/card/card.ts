@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {IPokemon} from '../../shared/types/pokemon.types';
-import {CapitalizeFirstPipe} from '../../shared/pipes/capitalize-first-pipe';
+import {CapitalizeFirstPipe} from '@app/shared/pipes/capitalize-first-pipe';
+import {IPokemon} from '@app/shared/types/pokemon.types';
 
 @Component({
   selector: 'app-card',

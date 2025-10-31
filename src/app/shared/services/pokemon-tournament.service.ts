@@ -1,5 +1,5 @@
-import {IPokemon, PokemonBattleResult, PokemonType} from '../types/pokemon.types';
 import {Injectable} from '@angular/core';
+import {IPokemon, PokemonBattleResult, PokemonType} from '../types/pokemon.types';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,11 @@ export class PokemonTournamentService {
     return !!this.typeAdvantages.get(typeA)?.includes(typeB);
   }
 
-  private calculateWinRates(pokemons: IPokemon[], stats: { wins: Map<number, number>; losses: Map<number, number>; ties: Map<number, number>; }): IPokemon[] {
+  private calculateWinRates(pokemons: IPokemon[], stats: {
+    wins: Map<number, number>;
+    losses: Map<number, number>;
+    ties: Map<number, number>;
+  }): IPokemon[] {
     return pokemons.map(pokemon => {
       const wins = stats.wins.get(pokemon.id) || 0;
       const losses = stats.losses.get(pokemon.id) || 0;
@@ -80,7 +84,11 @@ export class PokemonTournamentService {
     return this.calculateWinRates(pokemons, stats);
   }
 
-  public simulateBattle(stats: { wins: Map<number, number>; losses: Map<number, number>; ties: Map<number, number>; }, pokemonA: IPokemon, pokemonB: IPokemon): void {
+  public simulateBattle(stats: {
+    wins: Map<number, number>;
+    losses: Map<number, number>;
+    ties: Map<number, number>;
+  }, pokemonA: IPokemon, pokemonB: IPokemon): void {
     const result = this.simulateBattleOneOnOne(pokemonA, pokemonB);
     if (result.isTie) {
       stats.ties.set(pokemonA.id, (stats.ties.get(pokemonA.id) ?? 0) + 1);

@@ -4,7 +4,13 @@
     "outDir": "./out-tsc/app",
     "types": [
       "@angular/localize"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

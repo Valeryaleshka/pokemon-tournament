@@ -7,8 +7,9 @@ import {ISortParams} from '../../../shared/types/common.types';
 import {SortService} from '../../../shared/services/sort.service';
 
 export const defaultPokemonSortState: ISortParams = {
-  title: 'Name',
+  directionTitle: 'Ascending',
   direction: 'asc',
+  valueTitle: 'Name',
   value: 'name'
 };
 

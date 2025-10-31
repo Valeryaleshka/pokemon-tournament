@@ -1,25 +1,33 @@
-<div class="sort-container">
-  <select
-    [value]="currentSort().value"
-    (change)="onFieldChange($event)"
-    class="sort-select"
-  >
-    @for (option of sortOptions(); track option.value) {
-      <option [value]="option.value">
-        {{ option.title }}
-      </option>
-    }
-  </select>
+<div class="sort-dropdown-container">
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="sortFieldDropdown" ngbDropdownToggle>
+          {{ currentSort().valueTitle }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="sortFieldDropdown">
+          @for (option of sortOptions(); track option.value) {
+            <button ngbDropdownItem (click)="onFieldChange(option)">
+              {{ option.valueTitle }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
 
-  <select
-    [value]="currentSort().direction"
-    (change)="onDirectionChange($event)"
-    class="sort-select"
-  >
-    @for (direction of sortDirectionList; track direction.order) {
-      <option [value]="direction.order">
-        {{ direction.title }}
-      </option>
-    }
-  </select>
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="sortDirectionDropdown" ngbDropdownToggle>
+          {{ currentSort().directionTitle }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="sortDirectionDropdown">
+          @for (item of sortDirectionList; track item.direction) {
+            <button ngbDropdownItem (click)="onDirectionChange(item)">
+              {{ item.directionTitle }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

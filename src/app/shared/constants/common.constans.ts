@@ -1,10 +1,12 @@
-export const SortDirectionList = [
+import {SortOrder} from '../types/common.types';
+
+export const SortDirectionList: SortOrder[] = [
   {
-    order: 'asc',
-    title: 'Ascending'
+    direction: 'asc',
+    directionTitle: 'Ascending'
   }, {
-    order: 'desc',
-    title: 'Descending'
+    direction: 'desc',
+    directionTitle: 'Descending'
   }
 ]
 

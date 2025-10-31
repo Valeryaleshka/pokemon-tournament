@@ -1,27 +1,27 @@
-import {ISortOptions} from '../types/common.types';
+import {ISelectOption} from '../types/common.types';
 
 export const MinPokemonId = 1;
 export const MaxPokemonId = 151;
 
-export const PokemonSortOptions: ISortOptions[] = [
+export const PokemonSortOptions: ISelectOption[] = [
   {
     value: 'name',
-    title: 'Name',
+    valueTitle: 'Name',
   },
   {
     value: 'wins',
-    title: 'Winnings',
+    valueTitle: 'Winnings',
   },
   {
     value: 'losses',
-    title: 'Losses',
+    valueTitle: 'Losses',
   },
   {
     value: 'winrate',
-    title: 'Win Rate',
+    valueTitle: 'Win Rate',
   },
   {
     value: 'ties',
-    title: 'Ties',
+    valueTitle: 'Ties',
   },
 ]

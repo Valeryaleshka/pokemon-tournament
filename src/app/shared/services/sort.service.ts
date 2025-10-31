@@ -5,7 +5,7 @@ import {ISortParams} from '../types/common.types';
   providedIn: 'root'
 })
 export class SortService {
-  public sortBy<T>(sort: Omit<ISortParams, 'name'>, data: T[]): T[] {
+  public sortBy<T>(sort: ISortParams, data: T[]): T[] {
     if (!sort || !data || data.length === 0) {
       return data;
     }

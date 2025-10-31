@@ -1,13 +1,15 @@
 export type SortDirection = 'asc' | 'desc';
 
 export interface SortOrder {
-  title: string;
+  directionTitle: string;
   direction: SortDirection;
 }
 
-export interface ISortParams extends SortOrder {
+export interface ISelectOption {
   value: string;
+  valueTitle: string;
 }
 
-export interface ISortOptions extends Omit<ISortParams, 'direction'> {
+export interface ISortParams extends ISelectOption, SortOrder {
 }
+

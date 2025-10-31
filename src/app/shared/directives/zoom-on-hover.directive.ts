@@ -12,7 +12,7 @@ export class ZoomOnHoverDirective {
   renderer = inject(Renderer2);
 
   zoomIn() {
-    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.10)');
+    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.05)');
     this.renderer.setStyle(this.el.nativeElement, 'transition', 'transform 0.3s ease');
     this.renderer.setStyle(this.el.nativeElement, 'z-index', '10');
   }

@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col">
       <div ngbDropdown class="d-flex flex-column wrapper">
-        <label>Sort By</label>
-        <button type="button" class="btn btn-outline-primary text-start" id="sortFieldDropdown" ngbDropdownToggle>
+        <label class="mb-2">Sort By</label>
+        <button type="button" class="btn btn-outline-dark text-start" id="sortFieldDropdown" ngbDropdownToggle>
           {{ currentSort().valueTitle }}
         </button>
         <div ngbDropdownMenu aria-labelledby="sortFieldDropdown">
@@ -18,8 +18,8 @@
 
     <div class="col">
       <div ngbDropdown class="d-flex flex-column wrapper">
-        <label>Direction</label>
-        <button type="button" class="btn btn-outline-primary text-start" id="sortDirectionDropdown" ngbDropdownToggle>
+        <label class="mb-2">Direction</label>
+        <button type="button" class="btn btn-outline-dark text-start" id="sortDirectionDropdown" ngbDropdownToggle>
           {{ currentSort().directionTitle }}
         </button>
         <div ngbDropdownMenu aria-labelledby="sortDirectionDropdown">

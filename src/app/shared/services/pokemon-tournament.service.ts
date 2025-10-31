@@ -91,7 +91,6 @@ export class PokemonTournamentService {
   }
 
   public resetBattleStats(pokemons: IPokemon[]): IPokemon[] {
-    console.log('resetBattleStats');
     return pokemons.map(pokemon => ({
       ...pokemon,
       wins: 0,

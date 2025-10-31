@@ -1,19 +1,24 @@
 <app-header>
-  <div>
-    <h1>Pokemon League</h1>
+  <div class="d-flex flex-column justify-content-center align-items-center mt-3 px-3">
+    <div class="badge text-bg-info">Tournament. Statistics</div>
+    <h1>Pokémon League</h1>
+    <p class="text-center">Explore performance statistics from the latest Pokémon tournament. Sort by different
+      metrics to see who's leading
+      the competition</p>
   </div>
 </app-header>
+
 <app-second-header>
   <app-sort [sortOptions]="pokemonSortOptions" [currentSort]="pokemonService.currentSort()"
             (sortChange)="sortChanged($event)"></app-sort>
 </app-second-header>
+
 @if (pokemonService.loading()) {
-  Loading....
+  <app-screen-loader/>
 } @else {
   <app-card-wrapper>
     @for (pokemon of pokemons(); track pokemon.id) {
-      <app-card [pokemon]="pokemon"/>
+      <app-card [pokemon]="pokemon" appZoomOnHover/>
     }
-
   </app-card-wrapper>
 }

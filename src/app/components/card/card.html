@@ -1,10 +1,51 @@
-<div class="card-content">
-  <h3 class="title">{{ pokemon().name | capitalizeFirst }}</h3>
-  <div class="img-wrapper">
-    <img [ngSrc]="pokemon().imageUrl" alt="pokemon-image" fill priority>
+<div class="card pokemon-card shadow-lg border-0 h-100">
+  <div class="card-header bg-light text-white py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="card-title text-primary mb-0 fw-bold">{{ pokemon().name | capitalizeFirst }}</h5>
+      <div class="d-flex bg-light img-wrapper">
+        <img [ngSrc]="pokemon().imageUrl" class="pokemon-image" alt="pokemon-image" fill priority>
+      </div>
+    </div>
   </div>
-  <div>Winnings: {{ pokemon().wins }}</div>
-  <div>Looses: {{ pokemon().losses }}</div>
-  <div>Tie: {{ pokemon().ties }}</div>
-</div>
 
+  <div class="position-relative">
+    <div class="position-absolute top-0 end-0 m-2 d-flex flex-column gap-1">
+          <span class="badge type-badge text-capitalize">
+            {{ pokemon().type | capitalizeFirst }}
+          </span>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row text-center mb-3">
+      <div class="col-4">
+        <div class="stat-item">
+          <i class="fas fa-trophy text-warning mb-1"></i>
+          <div class="fw-bold fs-5 text-success">{{ pokemon().wins }}</div>
+          <small class="text-muted">Wins</small>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="stat-item">
+          <i class="fas fa-times text-danger mb-1"></i>
+          <div class="fw-bold fs-5 text-danger">{{ pokemon().losses }}</div>
+          <small class="text-muted">Losses</small>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="stat-item">
+          <i class="fas fa-handshake text-info mb-1"></i>
+          <div class="fw-bold fs-5">{{ pokemon().ties }}</div>
+          <small class="text-muted">Ties</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="win-rate mt-3 mb-3">
+    <div class="d-flex justify-content-sm-evenly align-items-center mb-1">
+      <small>Win Rate: <small class="fw-bold">{{ pokemon().winrate }}%</small></small>
+
+    </div>
+  </div>
+</div>

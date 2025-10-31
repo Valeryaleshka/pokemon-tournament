@@ -4,7 +4,7 @@ import {generateUniquePokemonIds} from '../../../shared/helpers/pokemon.helpers'
 import {PokemonProvider} from '../../../shared/providers/pokemon.provider';
 import {PokemonTournamentService} from "../../../shared/services/pokemon-tournament.service";
 import {ISortParams} from '../../../shared/types/common.types';
-import {SortService} from '../../../shared/services/sort.service';
+import {sortBy} from '../../../shared/helpers/sort.helper';
 
 export const defaultPokemonSortState: ISortParams = {
   directionTitle: 'Ascending',
@@ -17,12 +17,10 @@ export const defaultPokemonSortState: ISortParams = {
 export class PokemonService {
   provider = inject(PokemonProvider);
   pokemonTournamentService = inject(PokemonTournamentService);
-  sortService = inject(SortService);
 
   private _pokemons = signal<any[]>([]);
   public readonly pokemons = this._pokemons.asReadonly();
   public loading = signal<boolean>(false);
-  public error = signal<string | null>(null);
   public currentSort = signal(defaultPokemonSortState)
 
   private destroy$ = new Subject<void>();
@@ -32,7 +30,6 @@ export class PokemonService {
   }
 
   public setCurrentSort(sort: ISortParams) {
-    console.log(sort);
     this.currentSort.set(sort);
     this.sortPokemons();
   }
@@ -41,20 +38,14 @@ export class PokemonService {
     this._pokemons.update(value => this.pokemonTournamentService.simulateTournamentBattleForAll(value))
   }
 
-  public resetWarriors() {
-    this._pokemons.update(value => this.pokemonTournamentService.resetBattleStats(value))
-  }
-
   private sortPokemons() {
-    console.log(this.currentSort());
-    this._pokemons.update(value => this.sortService.sortBy(this.currentSort(), value))
+    this._pokemons.update(value => sortBy(this.currentSort(), value))
   }
 
   public initPokemons(numberOfPokemons: number): void {
     this.destroy$.next();
 
     this.loading.set(true);
-    this.error.set(null);
 
     combineLatest(this.generateObservables(generateUniquePokemonIds(numberOfPokemons)))
       .pipe(
@@ -62,14 +53,12 @@ export class PokemonService {
       )
       .subscribe({
         next: (pokemonData) => {
-          console.log(pokemonData)
           this.loading.set(false);
-          this._pokemons.set(this.sortService.sortBy(this.currentSort(), pokemonData));
+          this._pokemons.set(sortBy(this.currentSort(), pokemonData));
           this.initBattle();
         },
         error: (error) => {
           this.loading.set(false);
-          this.error.set('Failed to load pokemons');
           console.error('Error loading pokemons:', error);
         }
       });

@@ -1,11 +1,11 @@
-import {MaxPokemonId, MinPokemonId} from '../constants/pokemon.constants';
+import {MAX_POKEMON_ID, MIN_POKEMON_ID} from '../constants/pokemon.constants';
 
 export function generateUniquePokemonIds(count: number): number[] {
-  if (count < MinPokemonId || count > MaxPokemonId) {
-    throw new Error(`Count must be between ${MinPokemonId} and ${MaxPokemonId}`);
+  if (count < MIN_POKEMON_ID || count > MAX_POKEMON_ID) {
+    throw new Error(`Count must be between ${MIN_POKEMON_ID} and ${MAX_POKEMON_ID}`);
   }
 
-  const allNumbers = Array.from({length: MaxPokemonId}, (_, i) => i + 1);
+  const allNumbers = Array.from({length: MAX_POKEMON_ID}, (_, i) => i + 1);
 
   for (let i = allNumbers.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));

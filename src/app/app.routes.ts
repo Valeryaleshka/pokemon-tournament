@@ -15,6 +15,8 @@ export const routes: Routes = [
             (m) => m.PokemonsPage,
           ),
       },
-    ]
+    ],
+  }, {
+    path: '**', redirectTo: '/pokemons'
   }
 ];

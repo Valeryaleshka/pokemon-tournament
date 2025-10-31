@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SortComponent } from './sort';
 
-import { Sort } from './sort';
+
 
 describe('Sort', () => {
-  let component: Sort;
-  let fixture: ComponentFixture<Sort>;
+  let component: SortComponent;
+  let fixture: ComponentFixture<SortComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Sort]
+      imports: [SortComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Sort);
+    fixture = TestBed.createComponent(SortComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

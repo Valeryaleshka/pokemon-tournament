@@ -1,7 +1,7 @@
-import {Component, input, output} from '@angular/core';
-import {ISelectOption, ISortParams, SortOrder} from '../../shared/types/common.types';
-import {SortDirectionList} from '../../shared/constants/common.constans';
-import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import { Component, input, model } from '@angular/core';
+import { ISelectOption, ISortParams, SortOrder } from '../../shared/types/common.types';
+import { SORT_DIRECTION_LIST } from '../../shared/constants/common.constans';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sort',
@@ -9,14 +9,14 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './sort.html',
   styleUrl: './sort.less',
 })
-export class Sort {
+export class SortComponent {
   sortOptions = input.required<ISelectOption[]>();
-  currentSort = input.required<ISortParams>();
+  currentSort = model.required<ISortParams>();
 
-  sortChange = output<ISortParams>();
+  sortDirectionList = SORT_DIRECTION_LIST;
 
   onFieldChange(option: ISelectOption): void {
-    this.sortChange.emit({
+    this.currentSort.set({
       ...this.currentSort(),
       value: option.value,
       valueTitle: option.valueTitle
@@ -24,12 +24,10 @@ export class Sort {
   }
 
   onDirectionChange(order: SortOrder): void {
-    this.sortChange.emit({
+    this.currentSort.set({
       ...this.currentSort(),
       direction: order.direction,
       directionTitle: order.directionTitle
     });
   }
-
-  sortDirectionList = SortDirectionList
 }

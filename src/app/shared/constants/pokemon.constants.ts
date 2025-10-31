@@ -1,9 +1,9 @@
 import {ISelectOption} from '../types/common.types';
 
-export const MinPokemonId = 1;
-export const MaxPokemonId = 151;
+export const MIN_POKEMON_ID = 1;
+export const MAX_POKEMON_ID = 151;
 
-export const PokemonSortOptions: ISelectOption[] = [
+export const POKEMON_SORT_OPTIONS: ISelectOption[] = [
   {
     value: 'name',
     valueTitle: 'Name',

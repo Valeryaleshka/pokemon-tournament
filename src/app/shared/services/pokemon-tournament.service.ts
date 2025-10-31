@@ -1,7 +1,6 @@
 import {IPokemon, PokemonBattleResult, PokemonType} from '../types/pokemon.types';
 import {Injectable} from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,17 +18,22 @@ export class PokemonTournamentService {
   ]);
 
   private doesTypeBeat(typeA: PokemonType, typeB: PokemonType): boolean {
-    const advantages = this.typeAdvantages.get(typeA);
-    return advantages ? advantages.includes(typeB) : false;
+    return !!this.typeAdvantages.get(typeA)?.includes(typeB);
   }
 
-  private calculateWinRates(pokemons: IPokemon[]): IPokemon[] {
+  private calculateWinRates(pokemons: IPokemon[], stats: { wins: Map<number, number>; losses: Map<number, number>; ties: Map<number, number>; }): IPokemon[] {
     return pokemons.map(pokemon => {
-      const totalBattles = pokemon.wins + pokemon.losses + pokemon.ties;
-      const winrate = totalBattles > 0 ? (pokemon.wins / totalBattles) * 100 : 0;
+      const wins = stats.wins.get(pokemon.id) || 0;
+      const losses = stats.losses.get(pokemon.id) || 0;
+      const ties = stats.ties.get(pokemon.id) || 0;
+      const totalBattles = wins + losses + ties;
+      const winrate = totalBattles > 0 ? (wins / totalBattles) * 100 : 0;
 
       return {
         ...pokemon,
+        wins,
+        losses,
+        ties,
         winrate: Math.round(winrate)
       };
     });
@@ -59,44 +63,34 @@ export class PokemonTournamentService {
   }
 
   public simulateTournamentBattleForAll(pokemons: IPokemon[]): IPokemon[] {
-    const resetPokemons = this.resetBattleStats(pokemons);
+    const stats = {
+      wins: new Map<number, number>(),
+      losses: new Map<number, number>(),
+      ties: new Map<number, number>(),
+    };
 
-    for (let i = 0; i < resetPokemons.length; i++) {
-      for (let j = i + 1; j < resetPokemons.length; j++) {
-        const pokemonA = resetPokemons[i];
-        const pokemonB = resetPokemons[j];
-
-        this.simulateBattle(pokemonA, pokemonB);
+    for (let i = 0; i < pokemons.length; i++) {
+      for (let j = i + 1; j < pokemons.length; j++) {
+        const pokemonA = pokemons[i];
+        const pokemonB = pokemons[j];
+        this.simulateBattle(stats, pokemonA, pokemonB);
       }
     }
 
-    return this.calculateWinRates(resetPokemons);
+    return this.calculateWinRates(pokemons, stats);
   }
 
-  public simulateBattle(pokemonA: IPokemon, pokemonB: IPokemon): void {
+  public simulateBattle(stats: { wins: Map<number, number>; losses: Map<number, number>; ties: Map<number, number>; }, pokemonA: IPokemon, pokemonB: IPokemon): void {
     const result = this.simulateBattleOneOnOne(pokemonA, pokemonB);
-
     if (result.isTie) {
-      pokemonA.ties++;
-      pokemonB.ties++;
+      stats.ties.set(pokemonA.id, (stats.ties.get(pokemonA.id) ?? 0) + 1);
+      stats.ties.set(pokemonB.id, (stats.ties.get(pokemonB.id) ?? 0) + 1);
     } else if (result.winner === pokemonA) {
-      pokemonA.wins++;
-      pokemonB.losses++;
+      stats.wins.set(pokemonA.id, (stats.wins.get(pokemonA.id) ?? 0) + 1);
+      stats.losses.set(pokemonB.id, (stats.losses.get(pokemonB.id) ?? 0) + 1);
     } else {
-      pokemonB.wins++;
-      pokemonA.losses++;
+      stats.wins.set(pokemonB.id, (stats.wins.get(pokemonB.id) ?? 0) + 1);
+      stats.losses.set(pokemonA.id, (stats.losses.get(pokemonA.id) ?? 0) + 1);
     }
-
-    pokemonA.baseExperience
-  }
-
-  public resetBattleStats(pokemons: IPokemon[]): IPokemon[] {
-    return pokemons.map(pokemon => ({
-      ...pokemon,
-      wins: 0,
-      losses: 0,
-      ties: 0,
-      winrate: 0
-    }));
   }
 }

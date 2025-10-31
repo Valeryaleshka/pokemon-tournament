@@ -19,7 +19,8 @@
           "options": {
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "less",
@@ -31,7 +32,7 @@
             ],
             "styles": [
               "src/styles.less",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "bootstrap/dist/css/bootstrap.min.css"
             ]
           },
           "configurations": {
@@ -78,7 +79,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "less",
@@ -89,7 +91,8 @@
               }
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "bootstrap/dist/css/bootstrap.min.css"
             ]
           }
         }

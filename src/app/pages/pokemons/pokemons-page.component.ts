@@ -1,5 +1,5 @@
 import {ISortParams} from '@app/shared/types/common.types';
-import {Component, inject, signal} from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {SecondHeader} from '@app/components/second-header/second-header';
 import {Header} from '@app/components/header/header';
 import {Card} from '@app/components/card/card';
@@ -10,6 +10,7 @@ import {SortComponent} from '@app/components/sort/sort';
 import {PokemonService} from './services/pokemon.service';
 import {POKEMON_SORT_OPTIONS} from '@app/shared/constants/pokemon.constants';
 import { Cards } from '@app/components/cards/cards';
+import { POKEMON_COUNT } from '../../shared/constants/pokemon.constants';
 
 export const defaultPokemonSortState: ISortParams = {
   directionTitle: 'Ascending',
@@ -35,10 +36,14 @@ export const defaultPokemonSortState: ISortParams = {
   templateUrl: './pokemons-page.component.html',
   styleUrl: './pokemons-page.component.less',
 })
-export class PokemonsPage {
+export class PokemonsPage implements OnInit {
   protected readonly pokemonService = inject(PokemonService);
   pokemons = this.pokemonService.pokemons;
   sort = signal(defaultPokemonSortState);
+
+  ngOnInit() {
+    this.pokemonService.setNumberOfPokemons(POKEMON_COUNT)
+  }
 
   pokemonSortOptions = POKEMON_SORT_OPTIONS;
 }

@@ -1,12 +1,13 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, Input, OnInit, Renderer2 } from '@angular/core';
 import {PokemonType} from '../types/pokemon.types';
 
 @Directive({
   selector: '[appPokemonType]',
-  standalone: true
 })
-export class PokemonTypeDirective implements OnInit {
-  @Input('appPokemonType') pokemonType!: PokemonType;
+export class PokemonTypeDirective {
+  appPokemonType = input.required<PokemonType>();
+  private readonly elementRef = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
 
   private readonly typeColors: Record<PokemonType, string> = {
     [PokemonType.WATER]: '#4592c4',
@@ -38,30 +39,16 @@ export class PokemonTypeDirective implements OnInit {
     [PokemonType.NORMAL]: '#000000'
   };
 
-  constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2
-  ) {
-  }
-
-  ngOnInit(): void {
-    if (this.pokemonType && this.typeColors[this.pokemonType]) {
-      this.applyStyles();
-    }
-  }
-
-  private applyStyles(): void {
-    const backgroundColor = this.typeColors[this.pokemonType];
-    const textColor = this.textColors[this.pokemonType];
-
-    this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', backgroundColor);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'color', textColor);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'padding', '4px 12px');
-    this.renderer.setStyle(this.elementRef.nativeElement, 'border-radius', '5px');
-    this.renderer.setStyle(this.elementRef.nativeElement, 'font-size', '12px');
-    this.renderer.setStyle(this.elementRef.nativeElement, 'font-weight', 'bold');
-    this.renderer.setStyle(this.elementRef.nativeElement, 'text-transform', 'uppercase');
-    this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'inline-block');
-
+  constructor() {
+    effect(() => {
+        this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', this.typeColors[this.appPokemonType()] ?? '#a4acaf');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'color', this.textColors[this.appPokemonType()] ?? '#000000');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'padding', '4px 12px');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'border-radius', '5px');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'font-size', '12px');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'font-weight', 'bold');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'text-transform', 'uppercase');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'inline-block');
+      })
   }
 }

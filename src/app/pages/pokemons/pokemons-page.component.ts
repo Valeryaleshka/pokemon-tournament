@@ -38,8 +38,8 @@ export const defaultPokemonSortState: ISortParams = {
 })
 export class PokemonsPage implements OnInit {
   protected readonly pokemonService = inject(PokemonService);
-  pokemons = this.pokemonService.pokemons;
-  sort = signal(defaultPokemonSortState);
+  protected readonly pokemons = this.pokemonService.pokemons;
+  protected sort = signal(defaultPokemonSortState);
 
   ngOnInit() {
     this.pokemonService.setNumberOfPokemons(POKEMON_COUNT)

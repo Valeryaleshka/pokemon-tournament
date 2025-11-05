@@ -13,7 +13,7 @@ export class SortComponent {
   sortOptions = input.required<ISelectOption[]>();
   currentSort = model.required<ISortParams>();
 
-  sortDirectionList = SORT_DIRECTION_LIST;
+  protected sortDirectionList = SORT_DIRECTION_LIST;
 
   onFieldChange(option: ISelectOption): void {
     this.currentSort.set({

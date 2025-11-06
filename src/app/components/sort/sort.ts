@@ -15,7 +15,7 @@ export class SortComponent {
 
   protected sortDirectionList = SORT_DIRECTION_LIST;
 
-  onFieldChange(option: ISelectOption): void {
+  protected onFieldChange(option: ISelectOption): void {
     this.currentSort.set({
       ...this.currentSort(),
       value: option.value,
@@ -23,7 +23,7 @@ export class SortComponent {
     });
   }
 
-  onDirectionChange(order: SortOrder): void {
+  protected onDirectionChange(order: SortOrder): void {
     this.currentSort.set({
       ...this.currentSort(),
       direction: order.direction,

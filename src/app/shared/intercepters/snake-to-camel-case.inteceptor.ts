@@ -18,7 +18,7 @@ export const snakeToCamelCaseInterceptor: HttpInterceptorFn = (req, next) => {
   );
 };
 
-function bodyToSnakeCase(body: any): any {
+function bodyToSnakeCase(body: unknown): unknown {
   if (body) {
     return convertObjectKeys(body, camelToSnake);
   }
@@ -48,7 +48,7 @@ const camelToSnake = (str: string): string => {
   return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 };
 
-const convertObjectKeys = (obj: unknown, converter: (key: string) => string): any => {
+const convertObjectKeys = (obj: unknown, converter: (key: string) => string): unknown => {
   if (isPrimitive(obj)) {
     return obj;
   }

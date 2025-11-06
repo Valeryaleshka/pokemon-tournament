@@ -1,9 +1,9 @@
 import {ISortParams} from '../types/common.types';
 
-
-function getNestedValue(obj: any, path: string): any {
-  return path.split('.').reduce((current, key) => {
-    return current && current[key] !== undefined ? current[key] : undefined;
+function getNestedValue<T>(obj: T, path: string): unknown {
+  return path.split('.').reduce((current: unknown, key: string) => {
+    if (current === null || current === undefined) return undefined;
+    return (current as Record<string, unknown>)?.[key];
   }, obj);
 }
 
@@ -12,7 +12,7 @@ export function sortBy<T>(sort: ISortParams, data: T[]): T[] {
     return data;
   }
 
-  return [...data].sort((a: any, b: any) => {
+  return [...data].sort((a: T, b: T) => {
     const aValue = getNestedValue(a, sort.value);
     const bValue = getNestedValue(b, sort.value);
 
@@ -41,4 +41,3 @@ export function sortBy<T>(sort: ISortParams, data: T[]): T[] {
       : String(bValue).localeCompare(String(aValue));
   });
 }
-

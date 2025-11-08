@@ -1,8 +1,8 @@
-import {inject, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {IPokemon, PokemonType} from '../types/pokemon.types';
-import {map} from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IPokemon, PokemonType } from '../types/pokemon.types';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

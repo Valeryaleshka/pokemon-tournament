@@ -1,12 +1,12 @@
-import {Routes} from '@angular/router';
-import {Root} from './components/root/root';
+import { Routes } from '@angular/router';
+import { Root } from './components/root/root';
 
 export const routes: Routes = [
   {
     path: '',
     component: Root,
     children: [
-      {path: '', pathMatch: 'full', redirectTo: '/pokemons'},
+      { path: '', pathMatch: 'full', redirectTo: '/pokemons' },
       {
         path: 'pokemons',
         title: 'Pokemons Tournament',

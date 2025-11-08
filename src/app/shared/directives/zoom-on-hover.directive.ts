@@ -1,4 +1,4 @@
-import {Directive, ElementRef, inject, Renderer2} from '@angular/core';
+import { Directive, ElementRef, inject, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appZoomOnHover]',

@@ -11,8 +11,10 @@ export const snakeToCamelCaseInterceptor: HttpInterceptorFn = (req, next) => {
     map((event) => {
       if (event.type === HttpEventType.Response && event.body) {
         const camelCaseBody = convertObjectKeys(event.body, snakeToCamel);
+
         return event.clone({ body: camelCaseBody });
       }
+
       return event;
     }),
   );
@@ -22,6 +24,7 @@ function bodyToSnakeCase(body: unknown): unknown {
   if (body) {
     return convertObjectKeys(body, camelToSnake);
   }
+
   return body;
 }
 
@@ -35,8 +38,10 @@ function paramsToSnakeCase(params: HttpParams): HttpParams {
         newParams = newParams.delete(key).set(snakeKey, value);
       }
     });
+
     return newParams;
   }
+
   return params;
 }
 

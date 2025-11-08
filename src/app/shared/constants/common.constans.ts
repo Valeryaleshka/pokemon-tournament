@@ -1,4 +1,4 @@
-import {SortOrder} from '../types/common.types';
+import { SortOrder } from '../types/common.types';
 
 export const SORT_DIRECTION_LIST: SortOrder[] = [
   {

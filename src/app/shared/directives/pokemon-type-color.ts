@@ -1,5 +1,5 @@
-import { Directive, effect, ElementRef, inject, input, Input, OnInit, Renderer2 } from '@angular/core';
-import {PokemonType} from '../types/pokemon.types';
+import { Directive, effect, ElementRef, inject, input, Renderer2 } from '@angular/core';
+import { PokemonType } from '../types/pokemon.types';
 
 const typeColors: Record<PokemonType, string> = {
   [PokemonType.WATER]: '#4592c4',

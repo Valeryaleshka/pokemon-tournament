@@ -1,7 +1,7 @@
-import {Component, input, model} from '@angular/core';
-import {ISelectOption, ISortParams, SortOrder} from '@app/shared/types/common.types';
-import {SORT_DIRECTION_LIST} from '@app/shared/constants/common.constans';
-import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import { Component, input, model } from '@angular/core';
+import { ISelectOption, ISortParams, SortOrder } from '@app/shared/types/common.types';
+import { SORT_DIRECTION_LIST } from '@app/shared/constants/common.constans';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sort',

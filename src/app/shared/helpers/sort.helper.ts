@@ -1,8 +1,9 @@
-import {ISortParams} from '../types/common.types';
+import { ISortParams } from '../types/common.types';
 
 function getNestedValue<T>(obj: T, path: string): unknown {
   return path.split('.').reduce((current: unknown, key: string) => {
     if (current === null || current === undefined) return undefined;
+
     return (current as Record<string, unknown>)?.[key];
   }, obj);
 }

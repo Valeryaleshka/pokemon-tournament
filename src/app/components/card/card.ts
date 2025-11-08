@@ -1,8 +1,8 @@
-import {Component, input} from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
-import {IPokemon} from '@app/shared/types/pokemon.types';
-import {CapitalizeFirstPipe} from '../../shared/pipes/capitalize-first-pipe';
-import {PokemonTypeDirective} from '../../shared/directives/pokemon-type-color';
+import { Component, input } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { IPokemon } from '@app/shared/types/pokemon.types';
+import { CapitalizeFirstPipe } from '../../shared/pipes/capitalize-first-pipe';
+import { PokemonTypeDirective } from '../../shared/directives/pokemon-type-color';
 
 @Component({
   selector: 'app-card',

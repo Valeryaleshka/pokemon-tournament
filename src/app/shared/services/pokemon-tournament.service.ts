@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {IPokemon, PokemonBattleResult, PokemonType} from '../types/pokemon.types';
+import { Injectable } from '@angular/core';
+import { IPokemon, PokemonBattleResult, PokemonType } from '../types/pokemon.types';
 
 @Injectable({
   providedIn: 'root'
@@ -48,22 +48,22 @@ export class PokemonTournamentService {
     const bBeatsA = this.doesTypeBeat(pokemonB.type, pokemonA.type);
 
     if (aBeatsB && !bBeatsA) {
-      return {winner: pokemonA, loser: pokemonB, isTie: false};
+      return { winner: pokemonA, loser: pokemonB, isTie: false };
     }
 
     if (bBeatsA && !aBeatsB) {
-      return {winner: pokemonB, loser: pokemonA, isTie: false};
+      return { winner: pokemonB, loser: pokemonA, isTie: false };
     }
 
     if (pokemonA.baseExperience > pokemonB.baseExperience) {
-      return {winner: pokemonA, loser: pokemonB, isTie: false};
+      return { winner: pokemonA, loser: pokemonB, isTie: false };
     }
 
     if (pokemonB.baseExperience > pokemonA.baseExperience) {
-      return {winner: pokemonB, loser: pokemonA, isTie: false};
+      return { winner: pokemonB, loser: pokemonA, isTie: false };
     }
 
-    return {winner: null, loser: null, isTie: true};
+    return { winner: null, loser: null, isTie: true };
   }
 
   public simulateTournamentBattleForAll(pokemons: IPokemon[]): IPokemon[] {

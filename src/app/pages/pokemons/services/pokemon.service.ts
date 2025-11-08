@@ -1,12 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, combineLatest, finalize, Observable, of, switchMap } from 'rxjs';
 import { generateUniquePokemonIds } from '../../../shared/helpers/pokemon.helpers';
-import { PokemonProvider } from '../../../shared/providers/pokemon.provider';
+import { PokemonProvider } from '../../../shared/providers/pokemon/pokemon.provider';
 import { PokemonTournamentService } from "../../../shared/services/pokemon-tournament.service";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { MAX_POKEMON_ID, MIN_POKEMON_ID } from '../../../shared/constants/pokemon.constants';
-import { IPokemon } from '../../../shared/types/pokemon.types';
+import { MAX_POKEMON_ID, MIN_POKEMON_ID } from '@app/shared/constants/pokemon.constants';
+import { IPokemon } from '@app/shared/types/pokemon.types';
 
 @Injectable()
 export class PokemonService {
@@ -22,6 +22,7 @@ export class PokemonService {
         this.loading.set(true);
 
         return combineLatest(this.generateObservables(generateUniquePokemonIds(number)))
+          .pipe(map(pokemons => pokemons.filter(pokemon => pokemon !== null)))
           .pipe(map(pokemons => this.pokemonTournamentService.simulateTournamentBattleForAll(pokemons)))
           .pipe(finalize(() =>
           {
@@ -45,7 +46,7 @@ export class PokemonService {
     this.numberOfPokemons$.next(count);
   }
 
-  private generateObservables(ids: number[]): Observable<IPokemon>[] {
+  private generateObservables(ids: number[]): Observable<IPokemon | null>[] {
     return ids.map(id => this.provider.getSinglePokemon(id));
   }
 }

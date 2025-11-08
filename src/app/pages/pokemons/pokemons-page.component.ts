@@ -1,7 +1,6 @@
 import { ISortParams } from '@app/shared/types/common.types';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { SecondHeader } from '@app/components/second-header/second-header';
-import { Header } from '@app/components/header/header';
 import { Card } from '@app/components/card/card';
 import { ScreenLoader } from '@app/shared/components/screen-loader/screen-loader';
 import { ZoomOnHoverDirective } from '@app/shared/directives/zoom-on-hover.directive';
@@ -10,7 +9,8 @@ import { SortComponent } from '@app/components/sort/sort';
 import { PokemonService } from './services/pokemon.service';
 import { POKEMON_SORT_OPTIONS } from '@app/shared/constants/pokemon.constants';
 import { Cards } from '@app/components/cards/cards';
-import { POKEMON_COUNT } from '../../shared/constants/pokemon.constants';
+import { POKEMON_COUNT } from '@app/shared/constants/pokemon.constants';
+import { RouterLink } from '@angular/router';
 
 export const defaultPokemonSortState: ISortParams = {
   directionTitle: 'Ascending',
@@ -23,7 +23,6 @@ export const defaultPokemonSortState: ISortParams = {
   selector: 'app-pokemons',
   imports: [
     SecondHeader,
-    Header,
     Card,
     ScreenLoader,
     ZoomOnHoverDirective,
@@ -31,6 +30,7 @@ export const defaultPokemonSortState: ISortParams = {
     SortComponent,
     SecondHeader,
     Cards,
+    RouterLink,
   ],
   providers: [PokemonService],
   templateUrl: './pokemons-page.component.html',
@@ -42,7 +42,9 @@ export class PokemonsPage implements OnInit {
   protected sort = signal(defaultPokemonSortState);
 
   ngOnInit() {
-    this.pokemonService.setNumberOfPokemons(POKEMON_COUNT)
+    if (!this.pokemons().length) {
+      this.pokemonService.setNumberOfPokemons(POKEMON_COUNT);
+    }
   }
 
   pokemonSortOptions = POKEMON_SORT_OPTIONS;

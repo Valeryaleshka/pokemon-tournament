@@ -1,13 +1,3 @@
-<app-header>
-  <div class="d-flex flex-column justify-content-center align-items-center mt-3 px-3">
-    <div class="badge text-bg-info">Tournament. Statistics</div>
-    <h1>Pokémon League</h1>
-    <p class="text-center">Explore performance statistics from the latest Pokémon tournament. Sort by different
-      metrics to see who's leading
-      the competition</p>
-  </div>
-</app-header>
-
 <app-second-header>
   <app-sort [sortOptions]="pokemonSortOptions" [(currentSort)]="sort"></app-sort>
 </app-second-header>
@@ -17,7 +7,7 @@
 } @else {
   <app-cards>
     @for (pokemon of pokemons() | sortBy: sort(); track pokemon.id) {
-      <app-card [pokemon]="pokemon" appZoomOnHover/>
+      <app-card [routerLink]="pokemon.id" [pokemon]="pokemon" appZoomOnHover/>
     }
   </app-cards>
 }

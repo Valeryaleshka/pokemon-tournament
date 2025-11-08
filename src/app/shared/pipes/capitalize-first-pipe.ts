@@ -8,6 +8,7 @@ export class CapitalizeFirstPipe implements PipeTransform {
     if (!value.length) {
       return value;
     }
-    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+
+    return value.trim().charAt(0).toUpperCase() + value.slice(1).toLowerCase();
   }
 }

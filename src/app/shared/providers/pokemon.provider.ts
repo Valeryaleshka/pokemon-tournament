@@ -8,15 +8,15 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PokemonProvider {
-  http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   public getSinglePokemon(id: number): Observable<IPokemon> {
-    return this.http.get<PokermonApiResponse>(`https://pokeapi.co/api/v2/pokemon/${id}`).pipe(map((data) => {
+    return this.http.get<PokemonApiResponse>(`https://pokeapi.co/api/v2/pokemon/${id}`).pipe(map((data) => {
       return {
         id: data.id,
         name: data.name,
-        type: data.types[0]?.type.name || 'unknown',
-        baseExperience: data.baseExperience || 0,
+        type: data.types[0]?.type.name ?? 'unknown',
+        baseExperience: data.baseExperience ?? 0,
         imageUrl: data.sprites.frontDefault,
         wins: 0,
         losses: 0,
@@ -27,24 +27,24 @@ export class PokemonProvider {
   }
 }
 
-export interface PokermonApiResponse {
+export interface PokemonApiResponse {
   baseExperience: number;
   id: number;
   name: string;
   sprites: Sprites;
-  types: Type[];
+  types: IResponsePokemonType[];
 }
 
 export interface Sprites {
   frontDefault: string;
 }
 
-export interface Type {
+export interface IResponsePokemonType {
   slot: number;
-  type: Species;
+  type: IPokemonSpecies;
 }
 
-export interface Species {
+export interface IPokemonSpecies {
   name: PokemonType;
   url: string;
 }

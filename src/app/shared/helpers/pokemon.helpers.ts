@@ -5,7 +5,7 @@ export function generateUniquePokemonIds(count: number): number[] {
     throw new Error(`Count must be between ${MIN_POKEMON_ID} and ${MAX_POKEMON_ID}`);
   }
 
-  const allNumbers = Array.from({length: MAX_POKEMON_ID}, (_, i) => i + 1);
+  const allNumbers = Array.from({length: MAX_POKEMON_ID}, (_, index) => index + 1);
 
   for (let i = allNumbers.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));

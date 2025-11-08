@@ -15,9 +15,9 @@
 @if (pokemonService.loading()) {
   <app-screen-loader/>
 } @else {
-  <app-card-wrapper>
+  <app-cards>
     @for (pokemon of pokemons() | sortBy: sort(); track pokemon.id) {
       <app-card [pokemon]="pokemon" appZoomOnHover/>
     }
-  </app-card-wrapper>
+  </app-cards>
 }

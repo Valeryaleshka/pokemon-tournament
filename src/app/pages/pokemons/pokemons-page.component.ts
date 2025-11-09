@@ -7,16 +7,15 @@ import { ZoomOnHoverDirective } from '@app/shared/directives/zoom-on-hover.direc
 import { SortByPipe } from '@app/shared/pipes/sort-by-pipe';
 import { SortComponent } from '@app/components/sort/sort';
 import { PokemonService } from './services/pokemon.service';
-import { POKEMON_SORT_OPTIONS } from '@app/shared/constants/pokemon.constants';
+import { POKEMON_COUNT, POKEMON_SORT_OPTIONS } from '@app/shared/constants/pokemon.constants';
 import { Cards } from '@app/components/cards/cards';
-import { POKEMON_COUNT } from '@app/shared/constants/pokemon.constants';
 import { RouterLink } from '@angular/router';
 
 export const defaultPokemonSortState: ISortParams = {
   directionTitle: 'Ascending',
   direction: 'asc',
   valueTitle: 'Name',
-  value: 'name'
+  value: 'name',
 };
 
 @Component({
@@ -32,7 +31,6 @@ export const defaultPokemonSortState: ISortParams = {
     Cards,
     RouterLink,
   ],
-  providers: [PokemonService],
   templateUrl: './pokemons-page.component.html',
   styleUrl: './pokemons-page.component.less',
 })
@@ -42,6 +40,7 @@ export class PokemonsPage implements OnInit {
   protected sort = signal(defaultPokemonSortState);
 
   ngOnInit() {
+    console.log(this.pokemons());
     if (!this.pokemons().length) {
       this.pokemonService.setNumberOfPokemons(POKEMON_COUNT);
     }

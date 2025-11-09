@@ -3,11 +3,11 @@
 </app-second-header>
 
 @if (pokemonService.loading()) {
-  <app-screen-loader/>
+  <app-screen-loader />
 } @else {
   <app-cards>
     @for (pokemon of pokemons() | sortBy: sort(); track pokemon.id) {
-      <app-card [routerLink]="pokemon.id" [pokemon]="pokemon" appZoomOnHover/>
+      <app-card [routerLink]="['../', pokemon.id]" [pokemon]="pokemon" appZoomOnHover />
     }
   </app-cards>
 }
